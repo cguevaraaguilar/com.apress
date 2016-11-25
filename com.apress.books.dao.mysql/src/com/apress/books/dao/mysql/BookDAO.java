@@ -1,3 +1,10 @@
+/*
+Descripción:    Implementación de la interface DAO para el acceso a datos de la BD BOOKS.
+Autor:          Carlos Ernesto Guevara Aguilar.
+F. Creación:    25 de Noviembre de 2016.
+F. Cambio:      25 de Noviembre de 2016.
+                
+*/
 package com.apress.books.dao.mysql;
 
 import java.sql.Connection;
@@ -5,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +20,40 @@ import com.apress.books.model.Author;
 import com.apress.books.model.Book;
 import com.apress.books.model.Category;
 
+/**
+ * Clase de acceso a datos MySQL que implementa la interface IBookDAO.s
+ * @author caguevar
+ *
+ */
 public class BookDAO implements IBookDAO {
-
-	static {
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException ex) {
-			
-		} // try {
-	} // static {
 	
+	//#region Propiedades
+	
+	//#endregion
+	
+	//#region Constructor
+	
+	/**
+	 * Comprobación de existencia del driver jdbc.
+	 */
+	static {
+			
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException ex) {
+				
+			} // try {
+		} // static {
+
+	//#endregion
+
+	//#region Métodos
+	
+	/**
+	 * Método que obtiene la conexión activa.
+	 * @return La conexión activa.
+	 * @throws SQLException Si error al obtener la conexión activa.
+	 */
 	private Connection getConnection () throws SQLException {
 		
 		return (
@@ -32,6 +61,10 @@ public class BookDAO implements IBookDAO {
 				);
 	} // private Connection getConnection () throws SQLException {
 	
+	/**
+	 * Método que cierra la conexión indicada.
+	 * @param connection La conexión a cerrar.
+	 */
 	private void closeConnection (Connection connection) {
 		
 		if (connection == null) {
@@ -45,11 +78,175 @@ public class BookDAO implements IBookDAO {
 		} // try {
 	} // private void closeConnection (Connection connection) {
 	
+	/**
+	 * Método que obtiene todos los libros.
+	 */
 	public List <Book> findAllBooks () {
 		
 		List <Book> result = new ArrayList <> ();
 		List <Author> authorList = new ArrayList <>();
 		
 		String sql = "SELECT * FROM BOOK INNER JOIN AUTHOR ON BOOK.ID = AUTHOR.BOOK_ID;";
+		
+		Connection connection = null;
+		
+		try {
+			
+			connection = getConnection ();
+			
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				Book book = new Book ();
+				Author author = new Author ();
+				
+				book.setId(resultSet.getLong("ID"));
+				book.setBookdTitle(resultSet.getString("BOOK_TITLE"));
+				book.setCategoryId(resultSet.getLong("CATEGORY_ID"));
+				
+				author.setBookId(resultSet.getLong("BOOK_ID"));
+				author.setFirstName(resultSet.getString("FIRST_NAME"));
+				author.setLastName(resultSet.getString("LAST_NAME"));
+				
+				authorList.add(author);
+				
+				book.setAuthors(authorList);
+				book.setPublisherName(resultSet.getString("PUBLISHER"));
+				
+				result.add(book);
+			} // while (resultSet.next()) {
+		} catch (SQLException ex) {
+			
+			ex.printStackTrace();
+		} finally {
+			
+			closeConnection (connection);
+		} // try {
+		
+		return (result);
 	} // public List <Book> findAllBooks () {
+
+	/**
+	 * Método que obtiene todos los libros por similitud en nombre de libro, nombre de autor o apellido de autor.
+	 */
+	public List <Book> searchBooksByKeyword(String keyWord) {
+		
+		List <Book> result = new ArrayList <>();
+		List <Author> authorList = new ArrayList <>();
+		
+		String sql = "SELECT * FROM BOOK INNER JOIN AUTHOR ON BOOK.ID = AUTHOR.BOOK_ID;"
+				+ " WHERE BOOK_TITLE LIKE '%"
+				+ keyWord.toUpperCase().trim()
+				+ "%'"
+				+ " OR FIRST_NAME LIKE '%"
+				+ keyWord.toUpperCase().trim()
+				+ "%'"
+				+ " OR LAST_NAME LIKE '%" 
+				+ keyWord.toUpperCase().trim()
+				+ "%';"
+				;
+		
+		Connection connection = null;
+		
+		try {
+			
+			connection = getConnection ();
+			
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				Book book = new Book ();
+				Author author = new Author ();
+				
+				book.setId(resultSet.getLong("ID"));
+				book.setBookdTitle(resultSet.getString("BOOK_TITLE"));
+				book.setCategoryId(resultSet.getLong("CATEGORY_ID"));
+				
+				author.setBookId(resultSet.getLong("BOOK_ID"));
+				author.setFirstName(resultSet.getString("FIRST_NAME"));
+				author.setLastName(resultSet.getString("LAST_NAME"));
+				
+				authorList.add(author);
+				
+				book.setAuthors(authorList);
+				book.setPublisherName(resultSet.getString("PUBLISHER"));
+				
+				result.add(book);
+			} // while (resultSet.next()) {
+		} catch (SQLException ex) {
+			
+			ex.printStackTrace();
+		} finally {
+			
+			closeConnection (connection);
+		} // try {
+		
+		return (result);
+	} // public List <Book> searchBooksByKeyword(String keyWord) {
+	
+	/**
+	 * Método que obtiene todas las categorías.
+	 */
+	public List <Category> findAllCategories () {
+		
+		List <Category> result = new ArrayList <>();
+		
+		String sql = "SELECT * FROM CATEGORY;";
+		
+		Connection connection = null;
+		
+		try {
+			
+			connection = getConnection ();
+			
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				Category category = new Category ();
+				
+				category.setId(resultSet.getLong("ID"));
+				category.setCategoryDescription(resultSet.getString("CATEGORY_DESCRIPTION"));
+				
+				result.add(category);
+			} // while (resultSet.next()) {
+		} catch (SQLException ex) {
+			
+			ex.printStackTrace();
+		} finally {
+			
+			closeConnection (connection);
+		} // try {
+		
+		return (result);
+	} // public List <Category> findAllCategories () {
+	
+	/**
+	 * Método que inserta un libro.
+	 */
+	public void insert (Book book) {
+		
+	} // public void insert (Book book) {
+	
+	/**
+	 * Método que actualiza los datos de un libro.
+	 */
+	public void update (Book book) {
+		
+	} // public void update (Book book) {
+	
+	/**
+	 * Método que borra un libro.
+	 */
+	public void delete (Long bookId) {
+		
+	} // public void delete (Long bookId) {
+	
+	//#endregion
+	
 } // public class BookDAO implements IBookDAO {
