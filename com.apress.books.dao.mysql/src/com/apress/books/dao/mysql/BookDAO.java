@@ -1,7 +1,7 @@
 /*
-Descripci�n:    Implementaci�n de la interface DAO para el acceso a datos de la BD BOOKS.
+Descripcién:    Implementacién de la interface DAO para el acceso a datos de la BD BOOKS.
 Autor:          Carlos Ernesto Guevara Aguilar.
-F. Creaci�n:    25 de Noviembre de 2016.
+F. Creacién:    25 de Noviembre de 2016.
 F. Cambio:      25 de Noviembre de 2016.
                 
 */
@@ -54,7 +54,7 @@ public class BookDAO implements IBookDAO {
 	} // public BookDAO (String vsConnectionString, String vsUser, String vsPassword) {
 	
 	/**
-	 * Comprobaci�n de existencia del driver jdbc.
+	 * Comprobacién de existencia del driver jdbc.
 	 */
 	static {
 			
@@ -67,12 +67,12 @@ public class BookDAO implements IBookDAO {
 
 	//#endregion
 
-	//#region M�todos
+	//#region Métodos
 	
 	/**
-	 * M�todo que obtiene la conexi�n activa.
-	 * @return La conexi�n activa.
-	 * @throws SQLException Si error al obtener la conexi�n activa.
+	 * Método que obtiene la conexién activa.
+	 * @return La conexién activa.
+	 * @throws SQLException Si error al obtener la conexién activa.
 	 */
 	private Connection getConnection () throws SQLException {
 		
@@ -82,8 +82,8 @@ public class BookDAO implements IBookDAO {
 	} // private Connection getConnection () throws SQLException {
 	
 	/**
-	 * M�todo que cierra la conexi�n indicada.
-	 * @param connection La conexi�n a cerrar.
+	 * Método que cierra la conexién indicada.
+	 * @param connection La conexién a cerrar.
 	 */
 	private void closeConnection (Connection connection) {
 		
@@ -99,7 +99,7 @@ public class BookDAO implements IBookDAO {
 	} // private void closeConnection (Connection connection) {
 	
 	/**
-	 * M�todo que obtiene todos los libros.
+	 * Método que obtiene todos los libros.
 	 */
 	public List <Book> findAllBooks () {
 		
@@ -149,7 +149,7 @@ public class BookDAO implements IBookDAO {
 	} // public List <Book> findAllBooks () {
 
 	/**
-	 * M�todo que obtiene todos los libros por similitud en nombre de libro, nombre de autor o apellido de autor.
+	 * Método que obtiene todos los libros por similitud en nombre de libro, nombre de autor o apellido de autor.
 	 */
 	public List <Book> searchBooksByKeyword(String keyWord) {
 		
@@ -209,7 +209,7 @@ public class BookDAO implements IBookDAO {
 	} // public List <Book> searchBooksByKeyword(String keyWord) {
 	
 	/**
-	 * M�todo que obtiene todas las categor�as.
+	 * Método que obtiene todas las categoréas.
 	 */
 	public List <Category> findAllCategories () {
 		
@@ -247,21 +247,21 @@ public class BookDAO implements IBookDAO {
 	} // public List <Category> findAllCategories () {
 	
 	/**
-	 * M�todo que inserta un libro.
+	 * Método que inserta un libro.
 	 */
 	public void insert (Book book) {
 		
 	} // public void insert (Book book) {
 	
 	/**
-	 * M�todo que actualiza los datos de un libro.
+	 * Método que actualiza los datos de un libro.
 	 */
 	public void update (Book book) {
 		
 	} // public void update (Book book) {
 	
 	/**
-	 * M�todo que borra un libro.
+	 * Método que borra un libro.
 	 */
 	public void delete (Long bookId) {
 		
