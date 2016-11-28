@@ -23,7 +23,7 @@ public class BookApp {
 	/**
 	 * Acceso a la BD BOOKS.
 	 */
-	// private static BookDAO bookDAO = new BookDAO();
+	private static BookDAO bookDAO = new BookDAO();
 	
 	//#endregion
 
