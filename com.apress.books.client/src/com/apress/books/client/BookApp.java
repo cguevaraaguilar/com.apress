@@ -1,7 +1,7 @@
 /*
-Descripci�n:    Clase de inicio de la aplicaci�n cliente.
+Descripcién:    Clase de inicio de la aplicacién cliente.
 Autor:          Carlos Ernesto Guevara Aguilar.
-F. Creaci�n:    25 de Noviembre de 2016.
+F. Creacién:    25 de Noviembre de 2016.
 F. Cambio:      27 de Noviembre de 2016.
 				27 de Noviembre de 2016.
 					Se continuó desarrollo desde MACBOOK.
@@ -16,7 +16,7 @@ import com.apress.books.dao.mysql.BookDAO;
 import com.apress.books.model.Book;
 
 /**
- * Clase de inicio de la aplicaci�n cliente.
+ * Clase de inicio de la aplicacién cliente.
  * 
  * @author caguevar
  *
@@ -32,13 +32,13 @@ public class BookApp {
 
 	// #endregion
 
-	// #region M�todos
+	// #region Métodos
 
 	/**
-	 * M�todo de inicio de la aplicaci�n.
+	 * Método de inicio de la aplicacién.
 	 * 
 	 * @param args
-	 *            Argumentos con que iniciar� la aplicaci�n.
+	 *            Argumentos con que iniciaré la aplicacién.
 	 */
 	public static void main(String[] args) {
 
