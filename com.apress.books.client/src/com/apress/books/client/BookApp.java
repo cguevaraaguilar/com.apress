@@ -1,44 +1,90 @@
 /*
-Descripción:    Clase de inicio de la aplicación cliente.
+Descripciï¿½n:    Clase de inicio de la aplicaciï¿½n cliente.
 Autor:          Carlos Ernesto Guevara Aguilar.
-F. Creación:    25 de Noviembre de 2016.
-F. Cambio:      25 de Noviembre de 2016.
+F. Creaciï¿½n:    25 de Noviembre de 2016.
+F. Cambio:      27 de Noviembre de 2016.
+
+				27 de Noviembre de 2016.
+					Se continuÃ³ desarrollo desde MACBOOK.
                 
 */
 package com.apress.books.client;
+
+import java.util.List;
 
 import com.apress.books.dao.IBookDAO;
 import com.apress.books.dao.mysql.BookDAO;
 import com.apress.books.model.Book;
 
 /**
- * Clase de inicio de la aplicación cliente.
+ * Clase de inicio de la aplicaciï¿½n cliente.
+ * 
  * @author caguevar
  *
  */
 public class BookApp {
-	
-	//#region Propiedades
-	
+
+	// #region Propiedades
+
 	/**
 	 * Acceso a la BD BOOKS.
 	 */
-	// private static BookDAO bookDAO = new BookDAO();
-	
-	//#endregion
+	private static IBookDAO bookDAO = new BookDAO("jdbc:mysql://localhost:3306/books", "root", "b1ch052oo5A.");
 
-	//#region Métodos
-	
+	// #endregion
+
+	// #region Mï¿½todos
+
 	/**
-	 * Método de inicio de la aplicación.
-	 * @param args Argumentos con que iniciará la aplicación.
+	 * Mï¿½todo de inicio de la aplicaciï¿½n.
+	 * 
+	 * @param args
+	 *            Argumentos con que iniciarï¿½ la aplicaciï¿½n.
 	 */
 	public static void main(String[] args) {
-	
+
+		// List all books
 		System.err.println("Listing all Books:");
-			
+		findAllBooks ();
+		
+		System.out.println();
+		
+		//Search book by keyword
+		System.err.println("Search book by keyword in book title: Grovy:");
+		
+		searchBooks ("Groovy");
+		System.out.println();
+		
+		System.err.println("Search book by keyword in book author's name: Josh:");
+		
+		searchBooks("Josh");
 	} // public static void main(String[] args) {
+
+	/**
+	 * MÃ©todo que obtiene todos los libros.
+	 */
+	private static void findAllBooks () {
+		
+		List <Book> books = bookDAO.findAllBooks();
+		
+		for (Book book : books) {
+			
+			System.out.println(book);
+		} // for (Book book : books) {
+	} // private static void findAllBooks () {
 	
-	//#endregion 
-	
+	/**
+	 * MÃ©todo que obtiene libros por similitud
+	 * @param keyword Similitud por la cual buscar.
+	 */
+	private static void searchBooks (String keyword) {
+		
+		List <Book> books = bookDAO.searchBooksByKeyword(keyword);
+		
+		for (Book book : books) {
+			System.out.println(book);
+		} // for (Book book : books) {
+	} // private static void searchBooks (String keyword) {
+	// #endregion
+
 } // public class BookApp {

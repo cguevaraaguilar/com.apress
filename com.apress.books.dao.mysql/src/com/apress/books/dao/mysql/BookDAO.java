@@ -1,7 +1,7 @@
 /*
-Descripción:    Implementación de la interface DAO para el acceso a datos de la BD BOOKS.
+Descripciï¿½n:    Implementaciï¿½n de la interface DAO para el acceso a datos de la BD BOOKS.
 Autor:          Carlos Ernesto Guevara Aguilar.
-F. Creación:    25 de Noviembre de 2016.
+F. Creaciï¿½n:    25 de Noviembre de 2016.
 F. Cambio:      25 de Noviembre de 2016.
                 
 */
@@ -29,41 +29,62 @@ public class BookDAO implements IBookDAO {
 	
 	//#region Propiedades
 	
+	/*
+	 * Datos de conexiÃ³n con la BD.
+	 */
+	private String msDriver;
+	private String msConnectionString;
+	private String msUser;
+	private String msPassword;
+	
 	//#endregion
 	
 	//#region Constructor
 	
 	/**
-	 * Comprobación de existencia del driver jdbc.
+	 * Constructor de la clase.
+	 * @param vsConnectionString Cadena de conexiÃ³n.
+	 * @param vsUser Usuario de la BD.
+	 * @param vsPassword Password de la BD.
+	 */
+	public BookDAO (String vsConnectionString, String vsUser, String vsPassword) {
+		
+		msConnectionString = vsConnectionString;
+		msUser = vsUser;
+		msPassword = vsPassword;
+	} // public BookDAO (String vsConnectionString, String vsUser, String vsPassword) {
+	
+	/**
+	 * Comprobaciï¿½n de existencia del driver jdbc.
 	 */
 	static {
 			
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 			} catch (ClassNotFoundException ex) {
-				
+				System.err.println ("com.mysql.jdbc.Driver not found. " + ex.getMessage());
 			} // try {
 		} // static {
 
 	//#endregion
 
-	//#region Métodos
+	//#region Mï¿½todos
 	
 	/**
-	 * Método que obtiene la conexión activa.
-	 * @return La conexión activa.
-	 * @throws SQLException Si error al obtener la conexión activa.
+	 * Mï¿½todo que obtiene la conexiï¿½n activa.
+	 * @return La conexiï¿½n activa.
+	 * @throws SQLException Si error al obtener la conexiï¿½n activa.
 	 */
 	private Connection getConnection () throws SQLException {
 		
 		return (
-				DriverManager.getConnection("jdbc:mysql://localhost:3306/books", "root", "password")
+				DriverManager.getConnection(msConnectionString, msUser, msPassword)
 				);
 	} // private Connection getConnection () throws SQLException {
 	
 	/**
-	 * Método que cierra la conexión indicada.
-	 * @param connection La conexión a cerrar.
+	 * Mï¿½todo que cierra la conexiï¿½n indicada.
+	 * @param connection La conexiï¿½n a cerrar.
 	 */
 	private void closeConnection (Connection connection) {
 		
@@ -79,7 +100,7 @@ public class BookDAO implements IBookDAO {
 	} // private void closeConnection (Connection connection) {
 	
 	/**
-	 * Método que obtiene todos los libros.
+	 * Mï¿½todo que obtiene todos los libros.
 	 */
 	public List <Book> findAllBooks () {
 		
@@ -129,14 +150,14 @@ public class BookDAO implements IBookDAO {
 	} // public List <Book> findAllBooks () {
 
 	/**
-	 * Método que obtiene todos los libros por similitud en nombre de libro, nombre de autor o apellido de autor.
+	 * Mï¿½todo que obtiene todos los libros por similitud en nombre de libro, nombre de autor o apellido de autor.
 	 */
 	public List <Book> searchBooksByKeyword(String keyWord) {
 		
 		List <Book> result = new ArrayList <>();
 		List <Author> authorList = new ArrayList <>();
 		
-		String sql = "SELECT * FROM BOOK INNER JOIN AUTHOR ON BOOK.ID = AUTHOR.BOOK_ID;"
+		String sql = "SELECT * FROM BOOK INNER JOIN AUTHOR ON BOOK.ID = AUTHOR.BOOK_ID"
 				+ " WHERE BOOK_TITLE LIKE '%"
 				+ keyWord.toUpperCase().trim()
 				+ "%'"
@@ -189,7 +210,7 @@ public class BookDAO implements IBookDAO {
 	} // public List <Book> searchBooksByKeyword(String keyWord) {
 	
 	/**
-	 * Método que obtiene todas las categorías.
+	 * Mï¿½todo que obtiene todas las categorï¿½as.
 	 */
 	public List <Category> findAllCategories () {
 		
@@ -227,21 +248,21 @@ public class BookDAO implements IBookDAO {
 	} // public List <Category> findAllCategories () {
 	
 	/**
-	 * Método que inserta un libro.
+	 * Mï¿½todo que inserta un libro.
 	 */
 	public void insert (Book book) {
 		
 	} // public void insert (Book book) {
 	
 	/**
-	 * Método que actualiza los datos de un libro.
+	 * Mï¿½todo que actualiza los datos de un libro.
 	 */
 	public void update (Book book) {
 		
 	} // public void update (Book book) {
 	
 	/**
-	 * Método que borra un libro.
+	 * Mï¿½todo que borra un libro.
 	 */
 	public void delete (Long bookId) {
 		
