@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.dao.mysql"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.model"/>
 	<classpathentry kind="lib" path="D:/Software/MySQL Connector Java 5.1.40/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.dao"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.dao.mysql"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.model"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
