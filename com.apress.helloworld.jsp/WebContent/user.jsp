@@ -11,4 +11,4 @@
 		<jsp:setProperty name="user" property="name" value="Carlos"/>
 		Hola &nbsp; <jsp:getProperty name="user" property="name" />
 	</body>
-</html>
+</html>	
