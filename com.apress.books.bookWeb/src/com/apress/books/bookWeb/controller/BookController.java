@@ -4,7 +4,10 @@ package com.apress.books.bookWeb.controller;
  * Descripción:	Servlet que realiza las tareas de Controlador en el modelo MVC implementado.
  * Autor:		Carlos Ernesto Guevara Aguilar.
  * F. Creación:	29 de Noviembre de 2016.
- * F. Cambio:	29 de Noviembre de 2016.
+ * F. Cambio:	30 de Noviembre de 2016.
+ * 
+ * 				30 de Noviembre de 2016.
+ * 					Se continuó con el desarrollo.
  */
 
 import java.io.IOException;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.apress.books.dao.IBookDAO;
 import com.apress.books.dao.mysql.BookDAO;
 import com.apress.books.model.Category;
+import com.apress.books.model.Book;
 
 /**
  * Servlet que realiza las tareas de Controlador en el modelo MVC implementado.
@@ -69,7 +73,7 @@ public class BookController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// La procesa por el POST.
+		// La procesa el POST.
 		doPost(request, response);
 	} // protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -78,7 +82,7 @@ public class BookController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String base = "/jsp";
+		String base = "/jsp/";
 		String url = base + "home.jsp";
 		
 		String action = request.getParameter("action");
@@ -105,10 +109,62 @@ public class BookController extends HttpServlet {
 			} // switch (action) {
 		} // if (action != null) {
 		
+		// Obtiene el despachador
 		RequestDispatcher requestDispatcher = getServletContext ().getRequestDispatcher (url);
 		
+		// Redirige a la página indicada.
 		requestDispatcher.forward(request, response);
 	} // protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	/**
+	 * Método que obtiene todos los libros. 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void findAllBooks (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try {
+			
+			// Instancia el Objeto de acceso a datos.
+			IBookDAO bookDAO = new BookDAO("jdbc:mysql://localhost:3306/books", "root", "b1ch052oo5A.");
+			
+			// Obtiene todos los Libros
+			List<Book> bookList = bookDAO.findAllBooks();
+			
+			// Almancena en el request el listado de libros.
+			request.setAttribute("bookList", bookList);
+		} catch (Exception e) {
+			System.out.println(e);
+		} // try {
+	} // private void findAllBooks (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	/**
+	 * Método que obtiene los libros por similitud en nombre de autor, apellido de autor o título.
+	 * @param request
+	 * @param response
+	 * @param keyWord
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void searchBooks (HttpServletRequest request, HttpServletResponse response, String keyWord) throws ServletException, IOException {
+		
+		try {
+			
+			// Instancia el Objeto de acceso a datos.
+			IBookDAO bookDAO = new BookDAO("jdbc:mysql://localhost:3306/books", "root", "b1ch052oo5A.");
+			
+			// Obtiene todos los libros por similitud.
+			List<Book> bookList = bookDAO.searchBooksByKeyword(keyWord);
+			
+			// Almancena en el request el listado de libros.
+			request.setAttribute("bookList", bookList);
+		} catch (Exception e) {
+			
+			System.out.println(e);
+		} // try {
+	} // private void searchBooks (HttpServletRequest request, HttpServletResponse response, String keyWord) throws ServletException, IOException {
 	
 	// #endregion
 	
