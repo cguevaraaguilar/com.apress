@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="java.util.List" %>
+<%@page import="java.util.Iterator" %>
+<%@page import="com.apress.books.model.Category" %>
+
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -30,16 +34,16 @@
 		<%
 			
 		// Obtiene el listado de categorías
-		java.util.List<com.apress.books.model.Category> categoryList1 = 
-			(java.util.List<com.apress.books.model.Category>) application.getAttribute("categoryList");
+		List<Category> categoryList1 = 
+			(List<Category>) application.getAttribute("categoryList");
 	
 		// Obtiene el iterador a partir de la lista.
-		java.util.Iterator<com.apress.books.model.Category> iterator1 = categoryList1.iterator();
+		Iterator<Category> iterator1 = iterator();
 		
 		// Recorre el iterador.
 		while (iterator1.hasNext()) {
 			
-			com.apress.books.model.Category category1 = (com.apress.books.model.Category) iterator1.next(); 
+			Category category1 = (Category) iterator1.next(); 
 		%>
 			<li>
 				<a class="label" href="<%=param1%>?action=category&categoryId=<%=category1.getId()%>&category=<%=category1.getCategoryDescription()%>">

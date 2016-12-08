@@ -13,7 +13,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="D:/Software/MySQL Connector Java 5.1.40/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="D:/Software/MySQL Connector Java 5.1.40/mysql-connector-java-5.1.40-bin.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.dao"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.dao.mysql"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/com.apress.books.model"/>
