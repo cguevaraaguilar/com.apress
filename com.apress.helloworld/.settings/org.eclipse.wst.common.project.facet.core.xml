@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
-  <runtime name="JBoss EAP 7.0 Runtime"/>
-  <secondary-runtime name="GlassFish 4"/>
-  <secondary-runtime name="Apache Tomcat v8.5"/>
+  <runtime name="JEE Apache Tomcat 8.5"/>
   <fixed facet="wst.jsdt.web"/>
   <fixed facet="jst.web"/>
   <fixed facet="java"/>

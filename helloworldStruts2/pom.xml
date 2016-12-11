@@ -22,5 +22,4 @@
   <build>
     <finalName>helloworldStruts2</finalName>
   </build>
-  <packaging>war</packaging>
 </project>
