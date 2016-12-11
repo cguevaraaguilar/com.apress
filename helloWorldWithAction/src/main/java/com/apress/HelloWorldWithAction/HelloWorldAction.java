@@ -1,11 +1,13 @@
 package com.apress.HelloWorldWithAction;
 
 /*
- * Descripción:	Clase controladora del proyecto.
+ * Descripciï¿½n:	Clase controladora del proyecto.
  * Autor:		Carlos Ernesto Guevara Aguilar.
- * F. Creación:	8 de Diciembre de 2016.
- * F. Cambio:	8 de Diciembre de 2016.
+ * F. Creaciï¿½n:	8 de Diciembre de 2016.
+ * F. Cambio:	11 de Diciembre de 2016.
  * Comentarios:	
+ * 				11 de Diciembre de 2016.
+ * 					Se continuÃ³ con la construcciÃ³n de la clase dede MAC OS.
  * 
  */
 
@@ -19,5 +21,30 @@ import org.apache.struts2.convention.annotation.Result;
  */
 @Action(value="/hello", results = {@Result(name="success", location="/hello.jsp")})
 public class HelloWorldAction {
+	
+	//#region Propiedades
+	
+	private String name;
+	
+	//#endregion
+	
+	//#region MÃ©todos
+	
+	public String execute () throws Exception {
+		
+		return ("success");
+	} // public String execute () throws Exception {
+	
+	public String getName () {
+		
+		return (this.name);
+	} // public String getName () {
+	
+	public void setName (String name) {
+		
+		this.name = name;
+	} // public void setName (String name) {
+	
+	//#endregion
 
 } // public class HelloWorldAction {

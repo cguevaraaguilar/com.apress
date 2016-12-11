@@ -3,7 +3,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.apress</groupId>
   <artifactId>helloWorldWithAction</artifactId>
-  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>helloWorldWithAction Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -33,6 +32,6 @@
 		
   </dependencies>
   <build>
-    <finalName>helloWorldEithAction</finalName>
+    <finalName>helloWorldWithAction</finalName>
   </build>
 </project>
