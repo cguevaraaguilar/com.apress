@@ -19,8 +19,47 @@ public class LoginAction extends ActionSupport {
 	
 	//#region Propiedades
 	
+	private String username;
+	private String password;
+	
 	//#endregion
 	
+	//#region Métodos
 	
+	public String execute () {
+		
+		if (this.username.equals ("carlos") && this.password.equals("password")) {
+			
+			return ("success");
+			
+		} else {
+			
+			addActionError (getText ("error.login"));
+			
+			return ("error");
+		} // if (this.username.equals ("carlos") && this.password.equals("password")) {
+	} // public String execute () {
+	
+	public String getUsername () {
+		
+		return (this.username);
+	} // public String getUsername () {
+	
+	public void setUsername (String username) {
+		
+		this.username = username;
+	} // public void setUsername (String username) {
+	
+	public String getPassword () {
+		
+		return (this.password);
+	} // public String getPassword () {
+	
+	public void setPassword (String password) {
+		
+		this.password = password;
+	} // public void setPassword (String password) {
+	
+	//#endregion
 
 } // public class LoginAction extends ActionSupport {
