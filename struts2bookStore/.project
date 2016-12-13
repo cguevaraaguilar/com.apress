@@ -3,6 +3,9 @@
 	<name>struts2bookStore</name>
 	<comment></comment>
 	<projects>
+		<project>com.apress.books.model</project>
+		<project>com.apress.books.dao</project>
+		<project>com.apress.books.dao.mysql</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

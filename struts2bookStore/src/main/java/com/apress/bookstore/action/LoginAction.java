@@ -19,6 +19,8 @@ public class LoginAction extends ActionSupport {
 	
 	//#region Propiedades
 	
+	static final long serialVersionUID = 1;
+	
 	private String username;
 	private String password;
 	

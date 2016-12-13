@@ -2,8 +2,11 @@
 Descripcién:    Implementacién de la interface DAO para el acceso a datos de la BD BOOKS.
 Autor:          Carlos Ernesto Guevara Aguilar.
 F. Creacién:    25 de Noviembre de 2016.
-F. Cambio:      25 de Noviembre de 2016.
-                
+F. Cambio:      12 de Diciembre de 2016.
+Comentarios:
+           		12 de Diciembre de 2016.
+           			Se complementó la funcionalidad de DAO.
+           			Se agregó isUserAllowed, findBooksByCategory
 */
 package com.apress.books.dao.mysql;
 
@@ -19,6 +22,7 @@ import com.apress.books.dao.IBookDAO;
 import com.apress.books.model.Author;
 import com.apress.books.model.Book;
 import com.apress.books.model.Category;
+import com.apress.books.model.User;
 
 /**
  * Clase de acceso a datos MySQL que implementa la interface IBookDAO.s
@@ -266,6 +270,80 @@ public class BookDAO implements IBookDAO {
 	public void delete (Long bookId) {
 		
 	} // public void delete (Long bookId) {
+	
+	/**
+	 * Método que verifica si el usuario es válido en la aplicación.
+	 * @param user
+	 * @return
+	 */
+	public boolean isUserAllowed (User user) {
+		
+		String sql = "SELECT * FROM USER WHERE USERNAME = ? AND PASSWORD = ?;";
+		
+		Connection connection = null;
+		boolean valid = false;
+		
+		try {
+			
+			connection = getConnection ();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.clearParameters();
+			statement.setString(1, user.getUserName());
+			statement.setString(2, user.getPassword());
+			
+			ResultSet resultset = statement.executeQuery();
+			
+			if (resultset.next ()) {
+				
+				valid = true;
+			} // if (resultset.next ()) {
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			
+		} // try {
+		
+		return (valid);
+	} // public boolean isUserAllowed (User user) {
+	
+	public ArrayList <Book> findBooksByCategory (int categoryId) {
+		
+		ArrayList <Book> bookList = new ArrayList <Book> ();
+		List <Author> authorList = new ArrayList <> ();
+		String sql = "SELECT * FROM BOOK INNER JOIN AUTHOR ON BOOK.ID = AUTHOR.BOOK_ID WHERE CATEGORY_ID = ?;";
+		
+		Connection connection = null;
+		
+		try {
+			
+			connection = getConnection ();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.clearParameters ();
+			statement.setInt(1, categoryId);
+			
+			ResultSet resultset = statement.executeQuery ();
+			
+			while (resultset.next ()) {
+				
+				Book book = new Book ();
+				Author author = new Author ();
+				
+				book.setId(resultset.getLong("ID"));
+				book.setBookdTitle(resultset.getString("BOOK_TITLE"));
+				book.setCategoryId(resultset.getLong("CATEGORY_ID"));
+				
+				author.setBookId((book.getId());
+				author
+				
+			} // while (resultset.next ()) {
+		} catch (SQLException e) {
+			
+		} finally {
+			
+		} // try {
+	} // public ArrayList <Book> findBooksByCategory (int categoryId) {
 	
 	//#endregion
 	

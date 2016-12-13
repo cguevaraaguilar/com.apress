@@ -1,0 +1,26 @@
+/*
+ * Descripción:	Script que crea la tabla USER.
+ * Autor:		Carlos Ernesto Guevara Aguilar.
+ * F. Creación:	12 de Diciembre de 2016.
+ * F. Cambio:	12 de Diciembre de 2016.
+ * Comentarios:	
+ */
+
+USE BOOKS;
+
+DROP TABLE IF EXISTS USER;
+
+CREATE TABLE USER (
+
+	ID				INT				NOT NULL		AUTO_INCREMENT,
+	FIRST_NAME		VARCHAR (60)	NOT NULL,
+	LAST_NAME		VARCHAR (60)	NOT NULL,
+	USERNAME		VARCHAR (60)	NOT NULL,
+	PASSWORD		VARCHAR (60)	NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+INSERT INTO USER
+	(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD)
+VALUES
+	('GUEVARA', 'CARLOS', 'CGUERARA', 'PASSWORD');
